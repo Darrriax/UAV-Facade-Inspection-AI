@@ -1,0 +1,93 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="KCl5isMmJigy75GfnXZ4">
+    <mxGraphModel dx="1004" dy="702" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-8" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ZvjZ8EwTVR1L4AAgCLA4-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=auto;hachureAngle=-41;hachureGap=4;fillWeight=2;" value="Підготовка анотацій у форматі YOLO Segmentation" vertex="1">
+          <mxGeometry height="50" width="190" x="265" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-19" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ZvjZ8EwTVR1L4AAgCLA4-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=auto;hachureAngle=-41;hachureGap=4;fillWeight=2;" value="Нормалізація координат полігону" vertex="1">
+          <mxGeometry height="30" width="220" x="250" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-20" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ZvjZ8EwTVR1L4AAgCLA4-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=auto;hachureAngle=-41;hachureGap=4;fillWeight=2;" value="Масштабування зображень із збереженням пропорцій" vertex="1">
+          <mxGeometry height="40" width="200" x="260" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-21" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ZvjZ8EwTVR1L4AAgCLA4-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=auto;hachureAngle=-41;hachureGap=4;fillWeight=2;" value="Доповнення полями до 1280x1280 px" vertex="1">
+          <mxGeometry height="30" width="230" x="245" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-23" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ZvjZ8EwTVR1L4AAgCLA4-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=auto;hachureAngle=-41;hachureGap=4;fillWeight=2;" value="Нормалізація пікселів" vertex="1">
+          <mxGeometry height="30" width="145" x="287.5" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-30" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="ZvjZ8EwTVR1L4AAgCLA4-27">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="440" />
+              <mxPoint x="520" y="625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-12" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Навчання моделі?" vertex="1">
+          <mxGeometry height="80" width="130.5" x="294.75" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-29" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ZvjZ8EwTVR1L4AAgCLA4-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=auto;hachureAngle=-41;hachureGap=4;fillWeight=2;" value="&lt;p class=&quot;p1&quot; style=&quot;margin: 0px; text-align: justify; font-style: normal; font-variant: normal; font-size-adjust: none; font-language-override: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;;&quot;&gt;Застосування аугментацій:&lt;/p&gt;&lt;p class=&quot;p1&quot; style=&quot;margin: 0px; text-align: justify; font-style: normal; font-variant: normal; font-size-adjust: none; font-language-override: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;;&quot;&gt;— горизонтальне віддзеркалення&lt;/p&gt;&lt;p class=&quot;p1&quot; style=&quot;margin: 0px; text-align: justify; font-style: normal; font-variant: normal; font-size-adjust: none; font-language-override: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;;&quot;&gt;— вертикальне віддзеркалення&lt;/p&gt;&lt;p class=&quot;p1&quot; style=&quot;margin: 0px; text-align: justify; font-style: normal; font-variant: normal; font-size-adjust: none; font-language-override: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;;&quot;&gt;— зміна яскравості та контрастності&lt;/p&gt;&lt;p class=&quot;p1&quot; style=&quot;margin: 0px; text-align: justify; font-style: normal; font-variant: normal; font-size-adjust: none; font-language-override: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-stretch: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;;&quot;&gt;— додавання незначного шуму&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="250" x="90" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-18" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ZvjZ8EwTVR1L4AAgCLA4-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-14" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_2;whiteSpace=wrap;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="340" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-33" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ZvjZ8EwTVR1L4AAgCLA4-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-15" parent="1" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="45" width="45" x="343" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;hachureAngle=-41;hachureGap=7;fillWeight=3;dashed=1;dashPattern=8 8;fontStyle=1" value="Вхідне зображення та анотація" vertex="1">
+          <mxGeometry height="40" width="120" x="125" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-17" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="ZvjZ8EwTVR1L4AAgCLA4-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-24" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="ZvjZ8EwTVR1L4AAgCLA4-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-31" edge="1" parent="1" source="ZvjZ8EwTVR1L4AAgCLA4-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ZvjZ8EwTVR1L4AAgCLA4-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=auto;hachureAngle=-41;hachureGap=4;fillWeight=2;" value="Формування пари &quot;Зображення – анотація&quot;" vertex="1">
+          <mxGeometry height="50" width="156" x="287.5" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fillStyle=hatch;hachureAngle=-41;hachureGap=7;fillWeight=3;dashed=1;dashPattern=8 8;fontStyle=1" value="Готові дані для навчання нейронної мережі" vertex="1">
+          <mxGeometry height="40" width="156" x="475" y="692.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-34" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Так" vertex="1">
+          <mxGeometry height="30" width="60" x="250" y="413" as="geometry" />
+        </mxCell>
+        <mxCell id="ZvjZ8EwTVR1L4AAgCLA4-35" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Ні" vertex="1">
+          <mxGeometry height="30" width="60" x="410" y="413" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
