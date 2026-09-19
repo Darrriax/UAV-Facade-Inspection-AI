@@ -1,0 +1,234 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="rjiw0EbuzMtnluXmq36c">
+    <mxGraphModel dx="1409" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-27" parent="1" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#D6D6D6;strokeColor=#36393d;" value="&lt;p style=&quot;margin: 0px; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);&quot;&gt;«device»&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;Сервер застосунку&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="580" width="770" x="800" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-28" parent="1" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F0F0F0;fontColor=#333333;strokeColor=#666666;" value="&lt;p style=&quot;margin: 0px; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;«executionEnvironment»&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;Docker Host&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="500" width="720" x="820" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Інспектор /&lt;div&gt;Адміністратор&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="30" x="410" y="785" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-2" parent="1" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontColor=#333333;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;p style=&quot;margin: 0px; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);&quot;&gt;«device»&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);&quot;&gt;&lt;b&gt;Клієнтський пристрій&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="190" width="240" x="490" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-5" parent="1" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;«executionEnvironment»&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;Веббраузер&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="190" x="510" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-6" parent="1" style="html=1;align=center;verticalAlign=middle;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1;fontColor=#333333;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;Vue 3 + Three.js&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;(SPA-застосунок)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="50" width="120" x="540" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-19" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="tHGfbFIYpveTNtaMh3MS-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-20" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-19" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="UI" vertex="1">
+          <mxGeometry relative="1" x="0.0017" y="3" as="geometry">
+            <mxPoint x="-26" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-22" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="110" width="363" x="850" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-9" parent="tHGfbFIYpveTNtaMh3MS-22" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;«container»&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;nginx&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="363" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-34" edge="1" parent="tHGfbFIYpveTNtaMh3MS-22" source="tHGfbFIYpveTNtaMh3MS-10" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="tHGfbFIYpveTNtaMh3MS-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-10" parent="tHGfbFIYpveTNtaMh3MS-22" style="html=1;align=center;verticalAlign=middle;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;strokeWidth=1;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;Nginx&lt;/p&gt;" vertex="1">
+          <mxGeometry height="50" width="120" x="10" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-12" parent="tHGfbFIYpveTNtaMh3MS-22" style="html=1;align=center;verticalAlign=middle;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;strokeWidth=1;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;Статична збірка&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;Vue 3&lt;/p&gt;" vertex="1">
+          <mxGeometry height="50" width="120" x="220" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-21" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-6" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="tHGfbFIYpveTNtaMh3MS-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-49" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-21" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="HTTPS" vertex="1">
+          <mxGeometry relative="1" x="-0.0341" y="1" as="geometry">
+            <mxPoint x="9" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-29" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="110" width="130" x="1083" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-30" parent="tHGfbFIYpveTNtaMh3MS-29" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;«container»&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;backend&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="110" x="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-32" parent="tHGfbFIYpveTNtaMh3MS-29" style="html=1;align=center;verticalAlign=middle;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;strokeWidth=1;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;FastAPI&lt;/p&gt;" vertex="1">
+          <mxGeometry height="50" width="70" x="37" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-33" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="tHGfbFIYpveTNtaMh3MS-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-56" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-33" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="HTTP" vertex="1">
+          <mxGeometry relative="1" x="0.3189" y="1" as="geometry">
+            <mxPoint y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-26" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="120" width="130" x="1370" y="426" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-17" parent="tHGfbFIYpveTNtaMh3MS-26" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;«container»&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;redis&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-24" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="110" width="130" x="1370" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-13" parent="tHGfbFIYpveTNtaMh3MS-24" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;«container»&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;garage&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-14" parent="tHGfbFIYpveTNtaMh3MS-24" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;verticalAlign=bottom;spacingBottom=3;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="Garage&lt;div&gt;(S3-сховище)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="90" x="15" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-44" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontSize=12;startSize=8;endSize=8;jumpStyle=gap;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="tHGfbFIYpveTNtaMh3MS-83">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1335" y="652.5" />
+              <mxPoint x="1335" y="500.5" />
+            </Array>
+            <mxPoint x="1172" y="652.5" as="sourcePoint" />
+            <mxPoint x="1380" y="501.05" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-35" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;jumpStyle=gap;" target="tHGfbFIYpveTNtaMh3MS-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1335.06" y="677.49" />
+              <mxPoint x="1335.06" y="815.03" />
+            </Array>
+            <mxPoint x="1172" y="677.5" as="sourcePoint" />
+            <mxPoint x="1380" y="815" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-57" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-35" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="S3 API / HTTP" vertex="1">
+          <mxGeometry relative="1" x="-0.5669" as="geometry">
+            <mxPoint x="9" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-46" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="110" width="130" x="1370" y="583" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-15" parent="tHGfbFIYpveTNtaMh3MS-46" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;«container»&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;postgres&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="130" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-16" parent="tHGfbFIYpveTNtaMh3MS-46" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;verticalAlign=bottom;spacingBottom=3;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="PostgreSQL&lt;div&gt;(База даних)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="90" x="15" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-36" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.006;entryY=0.647;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;jumpStyle=gap;" target="tHGfbFIYpveTNtaMh3MS-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-58" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-36" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="SQL / TCP" vertex="1">
+          <mxGeometry relative="1" x="-0.1755" as="geometry">
+            <mxPoint x="1" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-48" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="144" width="363" x="850" y="431" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-38" parent="tHGfbFIYpveTNtaMh3MS-48" style="verticalAlign=top;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;«container»&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;celery-worker&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;&lt;b&gt;(xN реплік)&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="144" width="363" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-39" edge="1" parent="tHGfbFIYpveTNtaMh3MS-48" source="tHGfbFIYpveTNtaMh3MS-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;dashed=1;" target="tHGfbFIYpveTNtaMh3MS-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-43" edge="1" parent="tHGfbFIYpveTNtaMh3MS-48" source="tHGfbFIYpveTNtaMh3MS-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;dashed=1;" target="tHGfbFIYpveTNtaMh3MS-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-40" parent="tHGfbFIYpveTNtaMh3MS-48" style="html=1;align=center;verticalAlign=middle;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;strokeWidth=1;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;Celery Worker&lt;/p&gt;" vertex="1">
+          <mxGeometry height="50" width="120" x="220" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-41" parent="tHGfbFIYpveTNtaMh3MS-48" style="html=1;align=center;verticalAlign=middle;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;strokeWidth=1;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;YOLOv9-c&lt;/p&gt;" vertex="1">
+          <mxGeometry height="30" width="120" x="10" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-42" parent="tHGfbFIYpveTNtaMh3MS-48" style="html=1;align=center;verticalAlign=middle;dashed=0;whiteSpace=wrap;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;strokeWidth=1;" value="&lt;p style=&quot;margin: 0px; font-style: normal; font-variant-caps: normal; font-width: normal; font-size: 13px; line-height: normal; font-family: &amp;quot;Helvetica Neue&amp;quot;; font-size-adjust: none; font-kerning: auto; font-variant-alternates: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-position: normal; font-variant-emoji: normal; font-feature-settings: normal; font-optical-sizing: auto; font-variation-settings: normal;&quot;&gt;Playwright&lt;/p&gt;" vertex="1">
+          <mxGeometry height="30" width="120" x="10" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-73" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-48" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="Внутр. виклик" vertex="1">
+          <mxGeometry x="179.5" y="81" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-23" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-6" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.85;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;dashed=1;" target="tHGfbFIYpveTNtaMh3MS-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-50" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-23" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="HTTPS / Presigned URL" vertex="1">
+          <mxGeometry relative="1" x="-0.0066" y="1" as="geometry">
+            <mxPoint y="6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-51" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.15;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=12;startSize=8;endSize=8;curved=0;jumpStyle=gap;" target="tHGfbFIYpveTNtaMh3MS-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1346" y="543.52" />
+              <mxPoint x="1346" y="797.52" />
+            </Array>
+            <mxPoint x="1196" y="543.5" as="sourcePoint" />
+            <mxPoint x="1391" y="797.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-52" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=12;startSize=8;endSize=8;jumpStyle=gap;entryX=-0.002;entryY=0.293;entryDx=0;entryDy=0;entryPerimeter=0;" target="tHGfbFIYpveTNtaMh3MS-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1350" y="531" />
+              <mxPoint x="1350" y="647.7" />
+            </Array>
+            <mxPoint x="1380" y="647.49" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-54" edge="1" parent="1" source="tHGfbFIYpveTNtaMh3MS-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fontSize=12;startSize=8;endSize=8;jumpStyle=gap;entryX=0;entryY=1;entryDx=0;entryDy=0;" target="tHGfbFIYpveTNtaMh3MS-83">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1410" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-60" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="TCP" vertex="1">
+          <mxGeometry x="1272" y="647" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-64" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="25.5" width="1.3333333333330302" x="1271" y="513" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-61" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-64" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="S3 API / HTTP" vertex="1">
+          <mxGeometry y="25.5" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-62" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-64" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="SQL / TCP" vertex="1">
+          <mxGeometry x="0.33333333333303017" y="13" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-63" connectable="0" parent="tHGfbFIYpveTNtaMh3MS-64" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="TCP" vertex="1">
+          <mxGeometry x="1.3333333333330302" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-74" connectable="0" parent="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontColor=default;labelBackgroundColor=none;" value="Внутр. виклик" vertex="1">
+          <mxGeometry x="1029" y="538" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-89" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="50" width="100" x="1405" y="476" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-83" parent="tHGfbFIYpveTNtaMh3MS-89" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="49" width="8" x="-20" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-84" parent="tHGfbFIYpveTNtaMh3MS-89" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;perimeterSpacing=0;fillColor=#f5f5f5;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="49" width="80" x="-16" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-79" parent="tHGfbFIYpveTNtaMh3MS-89" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="49" width="8" x="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-87" edge="1" parent="tHGfbFIYpveTNtaMh3MS-89" source="tHGfbFIYpveTNtaMh3MS-83" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fillColor=#f5f5f5;strokeColor=#666666;" target="tHGfbFIYpveTNtaMh3MS-84" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="4" y="57" as="sourcePoint" />
+            <mxPoint x="20" y="17" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-88" edge="1" parent="tHGfbFIYpveTNtaMh3MS-89" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fillColor=#f5f5f5;strokeColor=#666666;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="tHGfbFIYpveTNtaMh3MS-79" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-16" as="sourcePoint" />
+            <mxPoint x="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tHGfbFIYpveTNtaMh3MS-75" parent="tHGfbFIYpveTNtaMh3MS-89" style="text;whiteSpace=wrap;html=1;align=center;" value="&lt;span style=&quot;caret-color: rgb(51, 51, 51); color: rgb(51, 51, 51); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(236, 236, 236); text-decoration: none; float: none; display: inline !important;&quot;&gt;Redis&lt;/span&gt;&lt;div style=&quot;caret-color: rgb(51, 51, 51); color: rgb(51, 51, 51); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-line: none; text-decoration-thickness: auto; text-decoration-style: solid;&quot;&gt;(Брокер&amp;nbsp;&lt;span style=&quot;caret-color: rgb(51, 51, 51); color: rgb(51, 51, 51);&quot;&gt;задач)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="49" width="80" x="-18" y="3" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

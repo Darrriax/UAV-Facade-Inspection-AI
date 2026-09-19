@@ -1,0 +1,97 @@
+@startuml
+skinparam componentStyle uml2
+skinparam packageStyle rectangle
+skinparam noteBackgroundColor LightYellow
+skinparam noteBorderColor Khaki
+
+package "Frontend (Vue 3 + TypeScript)" {
+    package "Pinia Stores" {
+        note "Кожен стор незалежно керує\nвласним доменом стану:\n- автентифікація\n- користувач\n- проєкти\n- дефекти та 3D-сцена" as N1
+        [Auth Store]
+        [User Store]
+        [Project Store]
+        [Defect Store]
+
+        N1 - [Auth Store]
+    }
+
+    [Vue Components]
+    [Three.js] as Three
+    [API Client]
+
+    [Vue Components] --> [Auth Store]
+    [Vue Components] --> [User Store]
+    [Vue Components] --> [Project Store]
+    [Vue Components] --> [Defect Store] : використовує стор
+    [Vue Components] -> [Three] : " керування 3D-сценою"
+
+    [Auth Store] --> [API Client]
+    [User Store] -> [API Client]
+    [Project Store] -> [API Client]
+    [Defect Store] --> [API Client] : виконує API-запити
+}
+
+package "Backend (FastAPI)" {
+    [Security Layer]
+    note right of [Security Layer]
+        Автентифікація на основі JWT
+        Налаштування CORS
+        Перевірка ролей (RBAC)
+    end note
+
+    package "Security Components" {
+        [JWT Dependency]
+        [RBAC Provider]
+    }
+
+    [Controllers]
+    [Services]
+    [Task Dispatcher]
+    [Repositories]
+
+    [Security Layer] --> [JWT Dependency] : перевіряє токен
+    [Security Layer] --> [RBAC Provider] : перевіряє права доступу
+
+    [JWT Dependency] --> [Controllers] : передає запит
+    [Controllers] -> [Services] : обробляє запит
+    [Services] -> [Repositories] : операції з даними
+    [Services] --> [Task Dispatcher] : відправка в чергу
+}
+
+package "Async Processing (Celery)" {
+    [Celery Worker]
+    [YOLOv9-c Inference] as YOLO
+    [Playwright PDF] as PDF
+
+    [Celery Worker] --> YOLO : ШІ-аналіз фото
+    [Celery Worker] --> PDF : рендеринг звітів
+}
+
+database "PostgreSQL" {
+    [Projects Table]
+    [Users Table]
+    [Defects Table]
+}
+
+queue "Redis" {
+    [Message Queue]
+}
+
+cloud "Garage S3" {
+    [Media Buckets]
+}
+
+' Зв'язки між основними блоками (зверху вниз)
+[API Client] --> [Security Layer] : HTTP-запити з JWT
+
+[Repositories] --> [Projects Table] : CRUD
+[Repositories] -> [Users Table]
+
+[Task Dispatcher] --> [Message Queue] : постановка задач
+[Message Queue] -> [Celery Worker] : видає задачу
+[Celery Worker] --> [Defects Table] : запис результатів аналізу
+
+[Services] -> [Media Buckets] : генерація Presigned URL
+[Celery Worker] --> [Media Buckets] : збереження масок та звітів
+
+@enduml
