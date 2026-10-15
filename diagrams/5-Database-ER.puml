@@ -1,0 +1,195 @@
+' ER diagram - Automated Building Facade Inspection System (PostgreSQL 16).
+'
+' Text twin of the ORM definition in code/backend/app/db/models.py and of the
+' migrations in code/backend/alembic/versions/. Every entity below is one
+' `__tablename__`, every row one `mapped_column`, and the types are the ones
+' PostgreSQL actually stores (verified against information_schema), not the
+' Python-side annotations. Render with the PlantUML CLI or the VS Code
+' extension - same command as 4-Deployment.puml:
+'
+'   docker run --rm -v "$PWD/diagrams:/d" plantuml/plantuml -tpng /d/5-Database-ER.puml
+'
+' ---------------------------------------------------------------------------
+' NOTATION
+' ---------------------------------------------------------------------------
+' «PK» primary key, «FK» foreign key, «UQ» unique value, «N» the column accepts
+' NULL (everything else is NOT NULL); the leading '*' marks a mandatory column.
+' Crow's foot reads as UML multiplicity: `||` exactly one, `o{` zero or many,
+' `|{` one or many.
+'
+' Every foreign key is ON DELETE CASCADE, so deleting a User removes their
+' Projects and everything hanging off them - frames, detections, meshes, 3D
+' markers. The rule is identical on all six edges, so it is not repeated as a
+' label on each one: the figure carries the tables and their links, nothing
+' else.
+'
+' `alembic_version` is deliberately absent: it is migration bookkeeping (one
+' `version_num` row), not part of the domain model.
+'
+' ---------------------------------------------------------------------------
+' WHY THE SHAPE IS WHAT IT IS (the takeaways worth defending)
+' ---------------------------------------------------------------------------
+' 1. defects carries NO project_id. A detection belongs to a frame and the
+'    frame belongs to the project, so storing the project twice would let the
+'    two disagree. Every "defects of a project" query joins through
+'    inspection_images.
+' 2. defect_maps_3d is an N:M association WITH PAYLOAD (point_x/y/z), not a
+'    plain join table: one crack can project onto several facets of the mesh,
+'    so the pair (defect_id, model_3d_id) is not unique - hence the surrogate
+'    key instead of a composite primary key. It is where the 3D localisation
+'    step writes its result.
+' 3. mask_polygon is JSONB rather than a points table: the mask is a list of
+'    closed rings in normalized [0..1] image coordinates, e.g.
+'    [[{x, y}, ...], [{x, y}, ...]], read and written whole and never queried
+'    by point, so a table per vertex would only add thousands of rows and one
+'    more join per frame. Several rings = one mask with disconnected parts.
+' 4. User.profile_photo_s3_path, Project.main_photo_s3_path and every s3_path
+'    are object KEYS inside the Garage buckets, never URLs: presigned URLs
+'    expire and are minted per read by the API.
+' 5. Pipeline state lives in columns, not in Redis: processing_stopped_at is
+'    the cooperative stop of the frame analysis, and model3d_requested_at /
+'    model3d_progress / model3d_error are the state of the reconstruction the
+'    worker runs - which is what lets the 3D page show, after a reload, that a
+'    build is genuinely in flight instead of offering to start a second one.
+' 6. Counters are NOT stored: total_images / completed_images / failed_images
+'    and total_defects / verified_defects are aggregated per request (two
+'    grouped queries per page), so nothing can drift out of sync with the rows.
+' 7. object_index (defects) is the object a detection belongs to on its frame:
+'    rows sharing the value are one piece of damage that the model reported as
+'    several overlapping fragments. It is assigned once, when the frame's
+'    detections are written, never recomputed on read - that is what makes
+'    every screen count the same number of defects.
+'
+' Constraints and indexes the figure does not spell out:
+'   users      CHECK ck_users_age_range              age IS NULL OR 0..120
+'              UNIQUE ix_users_email                one account per address
+'   defects    CHECK ck_defects_confidence_score_range  0..1
+'              INDEX (image_id, defect_class), (image_id, object_index),
+'                    ix_defects_defect_class
+'   inspection_images  INDEX (project_id, status) - the worker claims the next
+'                    batch of pending frames; ix_inspection_images_status
+'   projects   INDEX (user_id, created_at) - "my projects, newest first"
+'   defect_maps_3d     INDEX (model_3d_id, defect_id) - every marker of a model
+'
+' Identity and audit columns are inherited from two mixins, which is why all
+' six tables end the same way: id (UUIDv4 from gen_random_uuid()) and
+' created_at / updated_at defaulted by the database clock.
+
+@startuml
+skinparam shadowing false
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 44
+skinparam defaultFontName "DejaVu Sans"
+skinparam entity {
+    BackgroundColor #FCFCFD
+    BorderColor #4C5773
+    BorderThickness 1
+    FontColor #1F2937
+    AttributeFontColor #374151
+    AttributeFontSize 12
+    FontSize 14
+}
+skinparam note {
+    BackgroundColor #FFFBEA
+    BorderColor #D6C27A
+    FontSize 11
+}
+
+title ER-діаграма бази даних\nАвтоматизована система інспекції фасадів будівель
+
+entity "users" as users {
+    * id : uuid «PK»
+    --
+    * email : varchar(320) «UQ»
+    * password_hash : varchar(255)
+    * role : user_role = 'inspector'
+    * is_active : boolean = true
+    --
+    first_name : varchar(100) «N»
+    last_name : varchar(100) «N»
+    country : varchar(2) «N»
+    age : integer «N»
+    phone_number : varchar(32) «N»
+    profile_photo_s3_path : varchar(1024) «N»
+    --
+    * created_at : timestamptz
+    * updated_at : timestamptz
+}
+
+entity "projects" as projects {
+    * id : uuid «PK»
+    * user_id : uuid «FK → users.id»
+    --
+    * name : varchar(255)
+    location : varchar(512) «N»
+    description : text «N»
+    main_photo_s3_path : varchar(1024) «N»
+    * needs_3d_model : boolean = false
+    * detect_defects : boolean = true
+    processing_stopped_at : timestamptz «N»
+    model3d_requested_at : timestamptz «N»
+    model3d_error : text «N»
+    model3d_progress : integer «N»
+    --
+    * created_at : timestamptz
+    * updated_at : timestamptz
+}
+
+entity "inspection_images" as inspection_images {
+    * id : uuid «PK»
+    * project_id : uuid «FK → projects.id»
+    --
+    * file_path : varchar(1024)
+    s3_path : varchar(1024) «N»
+    * status : image_status = 'pending'
+    --
+    * created_at : timestamptz
+    * updated_at : timestamptz
+}
+
+entity "defects" as defects {
+    * id : uuid «PK»
+    * image_id : uuid «FK → inspection_images.id»
+    --
+    * defect_class : defect_class
+    * confidence_score : double precision
+    mask_polygon : jsonb «N»
+    * is_verified : boolean = false
+    * object_index : integer
+    --
+    * created_at : timestamptz
+    * updated_at : timestamptz
+}
+
+entity "models_3d" as models_3d {
+    * id : uuid «PK»
+    * project_id : uuid «FK → projects.id»
+    --
+    * s3_path : varchar(1024)
+    --
+    * created_at : timestamptz
+    * updated_at : timestamptz
+}
+
+entity "defect_maps_3d" as defect_maps_3d {
+    * id : uuid «PK»
+    * defect_id : uuid «FK → defects.id»
+    * model_3d_id : uuid «FK → models_3d.id»
+    --
+    * point_x : double precision
+    * point_y : double precision
+    * point_z : double precision
+    --
+    * created_at : timestamptz
+    * updated_at : timestamptz
+}
+
+users ||--o{ projects : "володіє"
+projects ||--o{ inspection_images : "містить кадри"
+projects ||--o{ models_3d : "має реконструкції"
+inspection_images ||--o{ defects : "має детекції"
+defects ||--o{ defect_maps_3d : "локалізується на"
+models_3d ||--o{ defect_maps_3d : "несе маркери"
+
+@enduml

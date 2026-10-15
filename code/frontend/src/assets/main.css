@@ -1,0 +1,50 @@
+/*
+ * Tailwind CSS v4 entry point.
+ *
+ * v4 is CSS-first: the import below pulls in the framework, and the `@theme`
+ * block defines design tokens that Tailwind turns into utilities
+ * (`--color-defect-crack` -> `text-defect-crack`, `bg-defect-crack`, ...).
+ * There is deliberately no tailwind.config.js - v4 does not need one.
+ */
+@import 'tailwindcss';
+
+/* Base layer: without an explicit background the page inherits the browser's
+ * canvas colour, which follows the OS theme and turns a light UI dark in the
+ * gaps between elements. The shell sets its own surface on top of this. */
+@layer base {
+  html,
+  body {
+    @apply bg-slate-50 text-slate-900;
+  }
+}
+
+/*
+ * Indeterminate progress: a segment sweeping a track, for work that is running
+ * but has no percentage yet (a 3D reconstruction queued but not yet reporting).
+ * Defined here rather than inline because the 3D page reaches it through
+ * Tailwind's arbitrary `animate-[bar-sweep_...]` utility, which needs the
+ * keyframes to exist in the stylesheet. `translate` rather than `left` so the
+ * sweep is composited instead of re-laying-out the bar 60 times a second.
+ */
+@keyframes bar-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
+@theme {
+  /* Facade defect classes coming out of the YOLOv9-c model. Colours live here
+   * rather than inline in components so the defect list, the bounding boxes on
+   * the photos and the 3D markers stay visually consistent. */
+  --color-defect-crack: oklch(0.62 0.21 27);
+  --color-defect-spalling: oklch(0.72 0.16 62);
+
+  /* Pipeline states used by the upload/progress screens. */
+  --color-status-pending: oklch(0.72 0.03 250);
+  --color-status-processing: oklch(0.72 0.14 240);
+  --color-status-completed: oklch(0.68 0.16 152);
+  --color-status-failed: oklch(0.6 0.2 20);
+}

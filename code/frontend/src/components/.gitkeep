@@ -1,0 +1,4 @@
+Reusable components (DefectCard, UploadDropzone, ModelViewer, ...).
+Presentational only: they take props and emit events, and never call the API
+directly - that keeps them testable and reusable across the admin and inspector
+screens.

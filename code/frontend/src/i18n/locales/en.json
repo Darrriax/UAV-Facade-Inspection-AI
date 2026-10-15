@@ -1,0 +1,427 @@
+{
+  "app": {
+    "name": "Facade Inspection",
+    "tagline": "Automated building facade inspection system",
+    "footer": "{name} · UAV facade inspection, YOLO defect detection, 3D reconstruction"
+  },
+  "nav": {
+    "main": "Main",
+    "mainMobile": "Main (mobile)",
+    "dashboard": "Dashboard",
+    "newProject": "New project",
+    "profile": "Profile",
+    "logout": "Logout",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "tryAgain": "Try again"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Switch to {language}"
+  },
+  "status": {
+    "draft": "Draft",
+    "uploading": "Uploading",
+    "processing": "Processing",
+    "paused": "Paused",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "defectClass": {
+    "crack": "Crack",
+    "spalling": "Spalling"
+  },
+  "auth": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "errors": {
+        "invalidCredentials": "Incorrect email or password.",
+        "deactivated": "This account has been deactivated. Contact an administrator."
+      }
+    }
+  },
+  "inspector": {
+    "counts": {
+      "photos": "{n} photo | {n} photos",
+      "defects": "{n} defect | {n} defects",
+      "frames": "{n} frame | {n} frames",
+      "confirmed": "{n} confirmed"
+    },
+    "projectForm": {
+      "name": "Project name",
+      "namePlaceholder": "Residential complex «Soniachnyi»",
+      "nameRequired": "Give the project a name.",
+      "location": "Location",
+      "locationPlaceholder": "Kyiv, Velyka Vasylkivska 12",
+      "description": "Description",
+      "descriptionPlaceholder": "Building type, number of storeys, what triggered the inspection…",
+      "photo": "Main photo",
+      "coverTypes": "JPEG, PNG, TIFF or WebP · up to {size}",
+      "typeFallback": "image",
+      "replace": "Replace",
+      "remove": "Remove",
+      "discard": "Discard",
+      "choose": "Choose a cover photo",
+      "invalidFile": "Only JPEG, PNG, TIFF or WebP — other formats are rejected.",
+      "fileTooLarge": "That file is {size}; the limit is {limit}."
+    },
+    "wizard": {
+      "eyebrow": "New inspection project",
+      "untitled": "Untitled project",
+      "steps": {
+        "aria": "Creation steps",
+        "details": {
+          "label": "Details",
+          "hint": "Name, location, cover photo"
+        },
+        "upload": {
+          "label": "Upload",
+          "hint": "UAV frames, folder or batches"
+        },
+        "processing": {
+          "label": "Processing",
+          "hint": "YOLO detection and 3D status"
+        }
+      },
+      "step1": {
+        "nameHint": "Shown on the project card and in the workspace.",
+        "photoHelp": "The cover shown on the project card. It is uploaded right after the project is created.",
+        "coverAlt": "Selected cover photo preview",
+        "resume": "is already created and waiting for its frames.",
+        "continueWithIt": "Continue with it",
+        "startNew": "Start a new one",
+        "coverFailedTitle": "The project was created, but its cover photo was not uploaded.",
+        "coverFailedHint": "Nothing else is lost: the project keeps its name, location and description. Retry the photo, or continue and add it later.",
+        "selectAgain": "Select the photo again",
+        "retryUpload": "Retry the upload",
+        "continueWithoutCover": "Continue without a cover",
+        "modelOutput": "Model output",
+        "modelOutputHelp": "A 3D reconstruction adds a photogrammetry pass, so processing takes longer.",
+        "generate3d": "Generate a 3D model",
+        "create": "Create project and continue",
+        "creating": "Creating…"
+      },
+      "step2": {
+        "title": "Upload UAV photos",
+        "help": "Drop the whole sortie folder, or pick files. {size} per frame. A large selection is sent in batches — up to {files} files, {concurrency} at a time.",
+        "queued3d": "3D reconstruction queued after detection",
+        "queueFailure": {
+          "title": "{n} frame is stored, but processing was not started. | {n} frames are stored, but processing was not started.",
+          "hint": "Nothing is lost — the frames are in storage and still marked pending. Starting the analysis again does not re-upload anything."
+        },
+        "chunkFailure": {
+          "title": "Batch {number} of {total} failed.",
+          "stopped": "The run stopped and processing was not started — a half-uploaded sortie is never analysed.",
+          "stored": "{n} frame was stored. | {n} frames were stored.",
+          "selected": "{n} frame is still selected and goes out on the next attempt. | {n} frames are still selected and go out on the next attempt."
+        },
+        "drop": {
+          "idle": "Drag and drop frames or a whole folder",
+          "active": "Drop the frames or the folder here",
+          "or": "or",
+          "files": "Choose files",
+          "folder": "Choose folder",
+          "scanning": "Reading the dropped folder…"
+        },
+        "rejected": {
+          "title": "{n} file skipped | {n} files skipped",
+          "noise": "Plus {n} macOS/Windows system file, ignored silently. | Plus {n} macOS/Windows system files, ignored silently.",
+          "dismiss": "Dismiss the skipped-files notice",
+          "empty": "empty file",
+          "notImage": "not a JPEG, PNG, TIFF or WebP",
+          "tooLarge": "{size} is over the {limit} per-file limit"
+        },
+        "selection": {
+          "files": "{n} frame selected | {n} frames selected",
+          "batches": "{n} batch to send | {n} batches to send",
+          "hidden": "…and {n} more selected (only the first {limit} are listed). | …and {n} more selected (only the first {limit} are listed).",
+          "clear": "Clear all",
+          "remove": "Remove {name}"
+        },
+        "progress": {
+          "files": "Uploaded {done} of {total} frames",
+          "batches": "batch {done} / {total} done",
+          "inFlight": "{n} in flight",
+          "aria": "{done} of {total} frames uploaded",
+          "cancel": "Cancel upload"
+        },
+        "stored": {
+          "title": "{n} frame stored on the server | {n} frames stored on the server",
+          "queued": "and queued for analysis.",
+          "notQueued": "— processing has not been started yet."
+        },
+        "actions": {
+          "upload": "Upload {n} frame | Upload {n} frames",
+          "start": "Start processing",
+          "uploadFrames": "Upload frames",
+          "uploading": "Uploading…",
+          "starting": "Starting processing…"
+        },
+        "toast": {
+          "noise": "{n} system file ignored | {n} system files ignored",
+          "noiseBody": "macOS/Windows bookkeeping files are not frames.",
+          "cancelled": "Upload cancelled",
+          "cancelledBody": "{n} frame was stored; the rest are still selected. | {n} frames were stored; the rest are still selected.",
+          "batchFailed": "Batch {number} of {total} failed",
+          "batchFailedBody": "{message} — {stored} frame was stored and nothing was queued. | {message} — {stored} frames were stored and nothing was queued.",
+          "uploaded": "{n} frame uploaded | {n} frames uploaded",
+          "uploadedBody": "Stored in {batches} batches. Starting the analysis…",
+          "uploadedBodyOne": "Stored in one batch. Starting the analysis…",
+          "queued": "{n} frame queued for analysis | {n} frames queued for analysis",
+          "queuedBody": "Task {task}… is running on the worker.",
+          "queueFailed": "Could not start processing"
+        }
+      },
+      "step3": {
+        "title": "Processing status",
+        "help": "YOLO defect detection per frame. This screen polls while the pipeline is busy.",
+        "help3d": "YOLO defect detection per frame, then the 3D reconstruction. This screen polls while the pipeline is busy.",
+        "mode3d": "2D + 3D",
+        "mode2d": "2D only",
+        "modeNoDetection": "3D, no detection",
+        "helpNoDetection": "The frames are marked as analysed without running the detector, then the 3D reconstruction. No frame gets a defect mask.",
+        "state": {
+          "finished": "Pipeline finished",
+          "stopped": "Stopped — nothing is being processed",
+          "refreshing": "Refreshing every {seconds} s",
+          "paused": "Polling paused"
+        },
+        "paused": {
+          "title": "Analysis stopped",
+          "remaining": "{n} frame is still waiting to be analysed | {n} frames are still waiting to be analysed",
+          "everyFrame": "Every frame was analysed before the stop.",
+          "kept": "The frames already analysed keep their results, including any defects already found."
+        },
+        "unqueued": {
+          "title": "{n} frame from this session is stored, but analysis was never started. | {n} frames from this session are stored, but analysis was never started.",
+          "hint": "They stay pending until processing is queued — nothing is coming for them in the meantime.",
+          "hintAction": "Go back to the upload step and press “Start processing”: the frames are then queued without being re-uploaded."
+        },
+        "empty": {
+          "title": "No frames uploaded yet",
+          "body": "This project has nothing to analyse — upload the UAV photos to start the pipeline.",
+          "action": "Upload photos"
+        },
+        "progress": {
+          "frames": "{processed} of {total} frames processed",
+          "updatedAt": "Updated at {time}",
+          "queuedAs": "{n} frame queued as task | {n} frames queued as task"
+        },
+        "failures": {
+          "lead": "{n} frame failed. | {n} frames failed.",
+          "hint": "Those rows keep their “failed” status — upload the same files again to run them."
+        },
+        "stalled": {
+          "text": "Nothing has changed for {seconds} s while frames are still pending. Two things cause that: the batch was never queued, or no worker is consuming the queue. The second is checked with:"
+        },
+        "actions": {
+          "stop": "Stop processing",
+          "stopping": "Stopping…",
+          "resume": "Resume processing ({n})",
+          "resuming": "Resuming…",
+          "workspace": "Go to Project Workspace",
+          "waiting": "Waiting for the analysis to finish",
+          "waitingHint": "Available once every frame has been analysed"
+        },
+        "reading": "Reading the pipeline status…",
+        "toast": {
+          "pollFailed": "Could not read the processing status",
+          "stopRequested": "Stop requested",
+          "stopBody": "The frame being analysed finishes first; the rest of the batch stays pending until you resume.",
+          "stopFailed": "Could not stop the analysis",
+          "resumed": "Analysis resumed",
+          "resumedBody": "{n} frame queued for analysis. | {n} frames queued for analysis.",
+          "resumeFailed": "Could not resume the analysis"
+        }
+      },
+      "toast": {
+        "created": "Project created",
+        "createdBody": "“{name}” is ready for its UAV frames.",
+        "createFailed": "Could not create the project",
+        "coverFailed": "Project created, but the cover photo failed",
+        "coverUploaded": "Cover photo uploaded",
+        "skipCover": "Continuing without a cover photo",
+        "skipCoverBody": "You can add one later from the project.",
+        "startingOver": "Starting a new project",
+        "startingOverBody": "The previously created one stays in your project list."
+      },
+      "projectUnavailable": {
+        "title": "This project cannot be opened.",
+        "back": "Back to my projects"
+      }
+    },
+    "workspace": {
+      "back": "Dashboard",
+      "untitled": "Project workspace",
+      "missingId": "This URL is missing a project id.",
+      "loadError": "Could not open this project.",
+      "loading": "Loading project workspace…",
+      "annotations": "Annotations",
+      "review": "Frame review",
+      "classes": "Classes",
+      "thisFrame": "this frame",
+      "tools": {
+        "title": "Tools",
+        "brush": "Brush",
+        "eraser": "Eraser"
+      },
+      "objects": {
+        "title": "Objects on this frame",
+        "none": "Nothing marked on this frame.",
+        "noneHint": "Paint over the damage with the Brush.",
+        "verified": "Verified",
+        "awaiting": "Awaiting review",
+        "action": {
+          "confirm": "Confirm {label} {confidence}",
+          "clear": "Clear {label} {confidence}",
+          "delete": "Delete {label} {confidence}"
+        }
+      },
+      "view": {
+        "group": "Project view",
+        "defects2d": "2D defects",
+        "model3d": "3D model",
+        "annotated": "Show the annotated view",
+        "plain": "Show the original photo"
+      },
+      "frame": {
+        "counter": "frame {index} / {total}",
+        "previous": "Previous frame",
+        "next": "Next frame",
+        "show": "Show frame {index} of {total}",
+        "noImage": "no image",
+        "status": {
+          "pending": "Queued",
+          "processing": "Analysing",
+          "completed": "Analysed",
+          "failed": "Failed"
+        }
+      },
+      "canvas": {
+        "alt": "Drone frame {file} with {n} defect object | Drone frame {file} with {n} defect objects",
+        "noObjectKey": "This frame has no stored object key",
+        "noPreview": "No preview available",
+        "loading": "Loading frame",
+        "failed": "This frame could not be loaded — its signed URL may have expired. Reload the project."
+      },
+      "empty": {
+        "title": "No frames to review yet",
+        "body": "Upload photos from the project wizard and every frame will appear here - including the ones the model finds nothing on."
+      },
+      "toast": {
+        "deleted": "Object deleted",
+        "deletedBody": "Removed from {source}",
+        "deletedManyBody": "{n} mask removed from {source} | {n} masks removed from {source}",
+        "deleteFailed": "Could not delete this object",
+        "confirmed": "Object confirmed",
+        "cleared": "Confirmation cleared",
+        "confirmedBody": "The review state is stored with the detection.",
+        "confirmedManyBody": "{n} detection recorded together. | {n} detections recorded together.",
+        "updateFailed": "Could not update this object"
+      }
+    },
+    "model3d": {
+  "back": "Dashboard",
+  "missingId": "This URL is missing a project id.",
+  "loadError": "Could not open this project.",
+  "loading": "Loading project…",
+  "review2d": "Review the 2D defects",
+  "build": "Build the 3D model",
+      "buildingAction": "Starting…",
+      "stop": "Stop",
+      "notRequested": {
+        "title": "No 3D model was requested",
+        "body": "This project was created without a 3D reconstruction, so photogrammetry never ran for it. The frame analysis is available in the 2D view."
+      },
+      "panel": {
+        "title": "No 3D model yet",
+        "quality": "Feature quality",
+        "source": "The project holds {total} frames.",
+        "noFrames": "The project has no frames to reconstruct a building from — upload the UAV photos first."
+      },
+      "run": {
+        "failed": "The reconstruction did not finish",
+        "preparing": "Preparing this project's frames…",
+        "uploading": "Reading and sending frames: {done} of {total}",
+        "queued": "Queued behind another reconstruction in NodeODM",
+        "processing": "NodeODM is processing the frames…",
+        "retrieving": "Downloading the 3D model…",
+        "saving": "Storing the model…",
+        "done": "Model built",
+        "stopped": "Stopped",
+        "saveFailed": "The model was not stored — it will be gone after a page reload. ",
+        "stage": "Reconstruction progress"
+      },
+      "viewer": {
+        "downloading": "Downloading the 3D model…",
+        "preparing": "Preparing the scene…",
+        "failedTitle": "The 3D model could not be displayed.",
+        "failedBody": "The signed URL may have expired, or the browser could not render the WebGL scene. Switch to the 2D defects — the analysis is unaffected."
+      }
+    },
+    "dashboard": {
+      "welcome": "Welcome back",
+      "stats": {
+        "projects": "{n} inspection project | {n} inspection projects",
+        "with3d": "{n} with 3D reconstruction",
+        "inProgress": "{n} in progress"
+      },
+      "createProject": "Create new project",
+      "loadError": "Could not load your projects.",
+      "more": "Showing the {shown} most recent of {total} projects.",
+      "empty": {
+        "title": "No inspection projects yet",
+        "body": "Create a project, upload the UAV frames and the defects will appear here."
+      },
+      "card": {
+        "coverAlt": "Preview of {name}",
+        "destination": {
+          "upload": "Upload photos",
+          "resume": "Resume processing",
+          "progress": "View processing progress",
+          "workspace": "Open workspace"
+        },
+        "failed": "{n} failed",
+        "failedTitle": "{n} frame could not be analysed | {n} frames could not be analysed",
+        "edit": "Edit project {name}",
+        "editTitle": "Edit “{name}”",
+        "delete": "Delete project {name}",
+        "deleteTitle": "Delete “{name}”"
+      },
+      "delete": {
+        "title": "Delete “{name}”?",
+        "body": "Its {photos} and {defects} are removed with it.",
+        "noUndo": "There is no undo.",
+        "stillRunning": "Analysis is still running for this project: the results stored so far are discarded with it.",
+        "confirm": "Delete project",
+        "deleting": "Deleting…"
+      },
+      "toast": {
+        "deleted": "Project deleted",
+        "deletedBody": "“{name}” and its analysis results were removed.",
+        "deleteFailed": "Could not delete this project"
+      },
+      "dialog": {
+        "title": "Edit project “{name}”",
+        "photoHelp": "The cover image on the project card. Uploading a new one replaces the current cover.",
+        "photoAlt": "Project cover photo",
+        "currentPhoto": "Current cover photo",
+        "selectedPhoto": "Selected cover photo",
+        "photoFailed": "The cover photo could not be uploaded: {error}",
+        "save": "Save changes",
+        "saving": "Saving…",
+        "toastSaved": "Project updated",
+        "toastSavedBody": "“{name}” is up to date.",
+        "toastSaveFailed": "Could not save the project",
+        "toastPhotoFailed": "Details saved, but the cover photo failed"
+      }
+    }
+  }
+}

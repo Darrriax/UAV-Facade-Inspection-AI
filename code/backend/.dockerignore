@@ -1,0 +1,23 @@
+# Never bake secrets, VCS metadata or local tooling state into the image.
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.venv
+venv
+__pycache__
+*.py[cod]
+*.egg-info
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.coverage
+htmlcov
+.idea
+.vscode
+.DS_Store
+*.md
+tests
+models/*.pt
+*.glb

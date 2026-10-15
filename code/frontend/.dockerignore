@@ -1,0 +1,15 @@
+# Keep the image a linux install of the lockfile, not a copy of the host's.
+#
+# Without this the context carries macOS node_modules (and the built dist/), and
+# the container would run the wrong esbuild/rollup binaries - which fails at
+# startup with an error that points at esbuild rather than at the mount.
+node_modules
+dist
+.vite
+
+# Local machine config; never bake an environment into the image.
+.env
+.env.local
+.env.*.local
+
+npm-debug.log*

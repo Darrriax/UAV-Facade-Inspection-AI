@@ -1,0 +1,3 @@
+Reusable stateful logic as `useXxx()` functions: useProjectPolling (YOLO/3D
+progress), useDefectSelection (shared between the defect list and the model),
+useDebouncedRef, useAsyncList (pagination + loading/error state).

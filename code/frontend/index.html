@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Automated building facade inspection system" />
+    <title>Facade Inspection</title>
+    <!--
+      The application's stylesheet, linked rather than imported from `main.ts`.
+      As a module import it was fetched only after the entry chunk had been
+      parsed and run - which in the dev server is seconds of unbundled modules -
+      so every load painted the application's markup unstyled first. As a link
+      the browser starts on it while the module graph is still downloading, and
+      the boot screen above arrives with the real surface, type and spacing.
+      Vite processes this tag the same way either way (hashed asset in a build,
+      a live HMR-replaceable tag in the dev server).
+    -->
+    <link rel="stylesheet" href="/src/assets/main.css" />
+    <!--
+      Boot paint, inline and ahead of every module.
+
+      The application cannot paint before its own bundles load, and it is
+      deliberately held back until the session is restored (see `main.ts`), so
+      without this the browser shows an empty white document for the whole of
+      that - which is exactly what a reload looks like after the tab was
+      discarded by the browser, or after Vite reloads the page when the HMR
+      socket is lost. Plain CSS (no Tailwind yet: the stylesheet arrives with the
+      bundle) so the first frame is already the application's own surface colour
+      with something on it, rather than a blank white page.
+    -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: #f8fafc;
+        color: #0f172a;
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      #boot {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 24px;
+        text-align: center;
+      }
+      #boot .ring {
+        width: 28px;
+        height: 28px;
+        border: 3px solid #cbd5e1;
+        border-top-color: #2563eb;
+        border-radius: 9999px;
+        animation: boot-spin 0.9s linear infinite;
+      }
+      #boot .name {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      #boot .hint {
+        margin: 0;
+        font-size: 13px;
+        color: #64748b;
+      }
+      @keyframes boot-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      /* The spinner is decoration; if motion is unwelcome, slow it down rather
+         than remove the only indication that something is happening. */
+      @media (prefers-reduced-motion: reduce) {
+        #boot .ring {
+          animation-duration: 2.4s;
+        }
+      }
+    </style>
+  </head>
+  <body class="h-full antialiased">
+    <!--
+      Single-page application: every screen is rendered by the router. The boot
+      block below is *inside* the mount point on purpose - Vue empties the
+      container when it mounts, so the first real paint replaces it with no extra
+      teardown, and a bundle that never loads leaves a readable message rather
+      than a white page.
+    -->
+    <div id="app" class="h-full">
+      <div id="boot" role="status">
+        <span class="ring" aria-hidden="true"></span>
+        <p class="name" data-boot="name">Facade Inspection</p>
+        <p class="hint" data-boot="hint">Starting the application…</p>
+      </div>
+    </div>
+    <script>
+      /*
+        The boot screen speaks the reader's language. It cannot use the i18n
+        catalogues - they arrive with the bundle this screen exists to wait for -
+        so it reads the same two facts `i18n/index.ts` does, from the same
+        storage key, and says the same two sentences.
+      */
+      ;(function localiseBoot() {
+        var locale = null
+        try {
+          locale = window.localStorage.getItem('facade.ui.locale')
+        } catch (error) {
+          /* Storage blocked (private mode): fall through to the browser's tag. */
+        }
+        if (locale !== 'uk' && locale !== 'en') {
+          var tags = navigator.languages || [navigator.language || '']
+          locale = String(tags[0] || '').toLowerCase().indexOf('uk') === 0 ? 'uk' : 'en'
+        }
+        if (locale !== 'uk') return
+
+        document.documentElement.lang = 'uk'
+        var name = document.querySelector('[data-boot="name"]')
+        var hint = document.querySelector('[data-boot="hint"]')
+        if (name) name.textContent = 'Інспекція фасадів'
+        if (hint) hint.textContent = 'Запускаємо застосунок…'
+      })()
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

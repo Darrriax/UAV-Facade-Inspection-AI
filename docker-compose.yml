@@ -1,0 +1,416 @@
+# Automated Building Facade Inspection System - local development stack.
+#
+#   docker compose up -d --build
+#     the whole system: postgres, redis, garage (S3), api, worker, nodeodm,
+#     frontend (the SPA) - plus a one-shot `bootstrap` that migrates the schema
+#     and creates the seed accounts before the API starts. That single command is
+#     the documented way to run this project; see RUNBOOK.md.
+#
+#   docker compose up -d --build --scale worker=3
+#
+# Two services carry their own image because they need a different build:
+#   * worker     - the only one with the AI stack (torch/ultralytics, ~2 GB); the
+#                  API is edited most often and must not pay for it.
+#   * frontend   - a Node image running the Vite dev server.
+#
+# Override any value from a `.env` file next to this file
+# (cp code/backend/.env.example .env). Defaults below are dev-only.
+#
+# Note the split between "what the host process needs" and "what the containers
+# need": the shared `.env` is written for an app started directly on the host, so
+# the container-internal service names (postgres, redis, garage) are hard-coded
+# below rather than taken from it - a container that inherits
+# `S3_ENDPOINT_URL=http://localhost:3900` would look for Garage inside itself.
+
+name: facade-inspection
+
+# ---------------------------------------------------------------------------
+# Shared definition for the API and the Celery worker: same env, same bind
+# mount - the image target and the `command` differ. They are built from two
+# targets of one Dockerfile because only the worker needs torch/ultralytics
+# (~2 GB), and the API is the service that gets edited most often.
+# ---------------------------------------------------------------------------
+x-app-common: &app-common
+  restart: unless-stopped
+  environment: &app-environment
+    ENVIRONMENT: ${ENVIRONMENT:-development}
+    DEBUG: ${DEBUG:-false}
+    BACKEND_CORS_ORIGINS: ${BACKEND_CORS_ORIGINS:-http://localhost:5173,http://localhost:3000}
+    # --- PostgreSQL (host is the compose service name) ---
+    POSTGRES_HOST: postgres
+    POSTGRES_PORT: 5432
+    POSTGRES_USER: ${POSTGRES_USER:-facade}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-facade}
+    POSTGRES_DB: ${POSTGRES_DB:-facade}
+    # --- Redis / Celery ---
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
+    # --- Garage S3 storage ---
+    # Server-side endpoint. Deliberately NOT `${S3_ENDPOINT_URL:-...}`: the
+    # shared `.env` points a host-run process at http://localhost:3900, which
+    # inside a container means the container itself. Same reasoning as
+    # POSTGRES_HOST and REDIS_HOST above. Override with
+    # S3_ENDPOINT_URL_INTERNAL when the containers should talk to a real S3.
+    S3_ENDPOINT_URL: ${S3_ENDPOINT_URL_INTERNAL:-http://garage:3900}
+    # Endpoint baked into presigned URLs. Must be reachable from the *browser*,
+    # which cannot resolve the compose-internal `garage` hostname - so this one is
+    # the published port, not the service name.
+    S3_PUBLIC_ENDPOINT_URL: ${S3_PUBLIC_ENDPOINT_URL:-http://localhost:3900}
+    # Dev-only credentials, imported into Garage by the bootstrap script. Garage
+    # requires the id to be "GK" + 12 hex bytes, so an arbitrary string will be
+    # rejected with "Invalid key format".
+    S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID:-GK0123456789abcdef01234567}
+    S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+    S3_REGION: ${S3_REGION:-garage}
+    S3_USE_SSL: ${S3_USE_SSL:-false}
+    S3_BUCKET_IMAGES: ${S3_BUCKET_IMAGES:-facade-images}
+    S3_BUCKET_MODELS: ${S3_BUCKET_MODELS:-facade-models}
+    # Browser origins the buckets answer with CORS headers. Needed because the 3D
+    # viewer fetches the presigned .glb with fetch() - an <img> tag would not
+    # care. "*" is the development default; narrow it in a real deployment.
+    S3_CORS_ALLOWED_ORIGINS: ${S3_CORS_ALLOWED_ORIGINS:-*}
+    # --- security ---
+    JWT_SECRET_KEY: ${JWT_SECRET_KEY:-change-me-in-production}
+    # --- AI inference ---
+    # Inside the worker this path resolves to code/backend/model/best.pt on the
+    # host, because ./code/backend is bind-mounted at /app. Dropping the trained
+    # weights there is all that is needed - no compose change, no rebuild.
+    YOLO_MODEL_PATH: ${YOLO_MODEL_PATH:-/app/model/best.pt}
+    YOLO_DEVICE: ${YOLO_DEVICE:-cpu}
+    # Inference parameters tuned experimentally on the trained checkpoint, and
+    # repeated here so the containers get them even when no `.env` is present.
+    # They are NOT Ultralytics' defaults (0.25 / 0.5) - do not "fix" them.
+    YOLO_CONFIDENCE_THRESHOLD: ${YOLO_CONFIDENCE_THRESHOLD:-0.01}
+    YOLO_IOU_THRESHOLD: ${YOLO_IOU_THRESHOLD:-0.7}
+    YOLO_IMAGE_SIZE: ${YOLO_IMAGE_SIZE:-1280}
+    YOLO_RETINA_MASKS: ${YOLO_RETINA_MASKS:-true}
+    # --- photogrammetry (NodeODM) ---
+    NODEODM_ENABLED: ${NODEODM_ENABLED:-true}
+    NODEODM_HOST: nodeodm
+    NODEODM_PORT: 3000
+    # Below this many frames a reconstruction cannot work, so the worker skips
+    # NodeODM entirely rather than spending an hour to fail.
+    NODEODM_MIN_IMAGES: ${NODEODM_MIN_IMAGES:-3}
+  volumes:
+    # Hot reload for both services. Drop this bind mount for production images.
+    - ./code/backend:/app
+  networks:
+    - backend
+
+services:
+  # --------------------------------------------------------------- PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-facade}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-facade}
+      POSTGRES_DB: ${POSTGRES_DB:-facade}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    ports:
+      # Published for host tooling (psql, a GUI client, an app started with
+      # uvicorn rather than in a container); the API and the worker reach the
+      # database over the compose network and never use this mapping.
+      # The host side defaults to 5433 rather than Postgres' own 5432 because a
+      # native Postgres install already listening on 5432 is common, and a
+      # collision here aborts the whole `docker compose up`. Set POSTGRES_PORT in
+      # the root .env to move it (or to 5432 where the port is free).
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      # The app must not start before migrations can run.
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-facade} -d ${POSTGRES_DB:-facade}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    networks:
+      - backend
+
+  # --------------------------------------------------------------------- Redis
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    # AOF on: a broker restart must not lose queued analysis jobs.
+    command: ["redis-server", "--appendonly", "yes", "--save", "60", "1"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+    networks:
+      - backend
+
+  # ------------------------------------------------- one-shot stack bootstrap
+  # Runs once per `docker compose up`, before the API and the worker: apply the
+  # migrations, converge the buckets/CORS rules, create the seed accounts.
+  #
+  # It exists so that starting the system is one command instead of the ordered
+  # sequence the runbook used to spell out - and it replaces "the API migrates on
+  # startup": a failing migration fails *this* container, and
+  # `condition: service_completed_successfully` then keeps the API and the worker
+  # from booting against a half-migrated schema, instead of every restart
+  # retrying a migration that cannot succeed.
+  bootstrap:
+    # Same context, target and tag as the API: no third image to build.
+    build:
+      context: ./code/backend
+      dockerfile: Dockerfile
+      target: api
+    image: facade-inspection-api:local
+    # The app anchor's `restart: unless-stopped` must not apply here - a one-shot
+    # step that gets restarted would re-run the seeds and migrations forever.
+    restart: "no"
+    environment:
+      <<: *app-environment
+      # Seed accounts. An empty email disables that seed; the values below are
+      # dev-only. Both create calls are idempotent (`--if-exists skip`), so this
+      # container is safe to run on every `up`.
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:-admin@example.com}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-admin-secret-1}
+      BOOTSTRAP_INSPECTOR_EMAIL: ${BOOTSTRAP_INSPECTOR_EMAIL:-inspector@example.com}
+      BOOTSTRAP_INSPECTOR_PASSWORD: ${BOOTSTRAP_INSPECTOR_PASSWORD:-inspector-secret-1}
+    volumes:
+      - ./code/backend:/app
+      # Mounted rather than COPY'd into the image: the script is about this
+      # compose stack, so it belongs next to docker-compose.yml - like Garage's.
+      - ./docker/backend/bootstrap.sh:/usr/local/bin/bootstrap.sh:ro
+    command: ["sh", "/usr/local/bin/bootstrap.sh"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      # init-storage reapplies the bucket CORS rules, and the Garage healthcheck
+      # only passes once the buckets exist - so this genuinely waits for a usable
+      # object store rather than an open port.
+      garage:
+        condition: service_healthy
+    networks:
+      - backend
+
+  # ------------------------------------------------------------- FastAPI app
+  api:
+    <<: *app-common
+    build:
+      context: ./code/backend
+      dockerfile: Dockerfile
+      target: api
+    image: facade-inspection-api:local
+    command:
+      - uvicorn
+      - app.main:app
+      - --host=0.0.0.0
+      - --port=8000
+      - --reload
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      # Transitively waits for postgres and garage (via bootstrap) *and* for the
+      # schema and the seed accounts to exist, which is what makes this service
+      # runnable straight from a fresh clone.
+      bootstrap:
+        condition: service_completed_successfully
+    healthcheck:
+      # Socket-only probe, independent of any particular route existing.
+      test:
+        - CMD
+        - python
+        - -c
+        - "import socket; socket.create_connection(('127.0.0.1', 8000), 2).close()"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+    networks:
+      - backend
+
+  # ----------------------------------------------------------------- the site
+  # The Vue SPA, containerised so that the frontend is part of the same single
+  # command as everything else - previously it was the one piece the runbook
+  # asked the reader to start by hand with npm.
+  #
+  # It runs the *dev server*, not a static build: the source is bind-mounted, so
+  # editing a component on the host still hot-reloads in the browser. A production
+  # image would be a multi-stage build with `npm run build` and a static server;
+  # it would serve the same files at a fraction of the memory, but it gives up the
+  # hot reload this stack is used with (uvicorn has --reload for the same reason).
+  frontend:
+    build:
+      context: ./code/frontend
+      dockerfile: Dockerfile
+    image: facade-inspection-frontend:local
+    restart: unless-stopped
+    environment:
+      # Vite proxies /api to the API: `api` is the compose-internal name. On the
+      # host the same config defaults to http://localhost:8000.
+      VITE_API_PROXY_TARGET: ${VITE_API_PROXY_TARGET:-http://api:8000}
+      # Docker Desktop does not forward the host's filesystem events into a
+      # container, so the watcher has to poll. Switch it off when running on a
+      # Linux host, where bind mounts do deliver events.
+      VITE_WATCH_POLLING: ${VITE_WATCH_POLLING:-true}
+    # --strictPort is not cosmetic: without it Vite silently moves to 5174 when
+    # 5173 is busy, and the published port then answers nothing.
+    command:
+      - npm
+      - run
+      - dev
+      - --
+      - --host=0.0.0.0
+      - --port=5173
+      - --strictPort
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    volumes:
+      # Hot reload: the host tree is what the dev server serves and watches.
+      - ./code/frontend:/app
+      # ...except for node_modules, which must stay the container's own. Docker
+      # seeds a *new named volume* from the image, and the image installed with
+      # `npm ci` for linux - so the container never picks up the host's macOS
+      # binaries, and no install step is needed on the host side either.
+      # After changing package.json: docker compose exec frontend npm install
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      # Not needed to serve the SPA, but the first /api call should not land on a
+      # proxy target that is still booting.
+      api:
+        condition: service_healthy
+    networks:
+      - backend
+
+  # ---------------------------------------------------------- Celery worker
+  worker:
+    <<: *app-common
+    # A distinct tag is required: with one shared tag the two builds would fight
+    # over it and whichever finished last would silently win.
+    build:
+      context: ./code/backend
+      dockerfile: Dockerfile
+      target: worker
+    image: facade-inspection-worker:local
+    # YAML merge keys replace mappings instead of merging them, so the source
+    # bind mount from the anchor has to be repeated here.
+    volumes:
+      - ./code/backend:/app
+      # If you prefer to keep the weights at the repository root instead of
+      # code/backend/model/, mount that one file. Left commented out on purpose:
+      # compose creates a *directory* at the target when the source file is
+      # missing, and Docker then reports a directory where a file is expected -
+      # a much more confusing failure than an absent file.
+      # - ./yolov9c_cubit_e136_best.pt:/app/model/best.pt:ro
+    command:
+      - celery
+      - -A
+      - app.tasks.celery_app:celery_app
+      - worker
+      - --loglevel=INFO
+      # Long CPU-bound YOLO tasks: keep one in-flight task per process and
+      # scale horizontally with `--scale worker=N` instead of threads.
+      - --concurrency=${CELERY_CONCURRENCY:-2}
+    depends_on:
+      # The schema is migrated and the seed accounts exist (see bootstrap).
+      bootstrap:
+        condition: service_completed_successfully
+      # The broker the worker consumes from.
+      redis:
+        condition: service_healthy
+      # Healthy rather than merely started, so the first reconstruction does not
+      # fail on a NodeODM that is still booting. The pipeline would cope either
+      # way - the 3D step is optional by design - but a silent skip is not what
+      # a developer wants to debug.
+      nodeodm:
+        condition: service_healthy
+    networks:
+      - backend
+
+  # ------------------------------------------- photogrammetry engine (NodeODM)
+  # OpenDroneMap behind a REST API: overlapping frames in, textured mesh out.
+  # It is the memory hog of the stack - a full-quality reconstruction will
+  # exhaust a workstation's RAM - which is why the worker sends the cheapest
+  # option set that still produces a textured model and skips the whole step
+  # when a project does not ask for a 3D model.
+  nodeodm:
+    image: opendronemap/nodeodm:latest
+    restart: unless-stopped
+    ports:
+      # Published only to inspect the API/UI from the host; the worker reaches it
+      # as nodeodm:3000 over the compose network.
+      - "${NODEODM_PORT:-3000}:3000"
+    volumes:
+      # Uploads and reconstructions. Without a named volume they would live in
+      # the container's writable layer and grow it by gigabytes per run.
+      - nodeodm_data:/var/www/data
+    healthcheck:
+      # /info is NodeODM's own version endpoint and curl ships in the image.
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:3000/info"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    networks:
+      - backend
+
+  # ----------------------------------------------- self-hosted S3 (Garage)
+  # The same software the production deployment uses, so local and production
+  # differ only by endpoint and region - and MinIO, the previous stand-in, is no
+  # longer a safe dependency (its Docker Hub images are gone, and it moved off
+  # the fully open-source model).
+  #
+  # The image is built from docker/garage: the upstream image ships only the
+  # /garage binary with no shell, which cannot run the multi-step bootstrap
+  # (`layout assign` -> `layout apply` -> `key import` -> `bucket create`).
+  garage:
+    build:
+      context: ./docker/garage
+      dockerfile: Dockerfile
+      args:
+        GARAGE_VERSION: ${GARAGE_VERSION:-v2.0.0}
+    image: facade-inspection-garage:local
+    restart: unless-stopped
+    environment:
+      # Dev-only secrets. Both are injected through the environment rather than
+      # the config file, which keeps the mounted garage.toml free of secrets.
+      GARAGE_RPC_SECRET: ${GARAGE_RPC_SECRET:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      GARAGE_ADMIN_TOKEN: ${GARAGE_ADMIN_TOKEN:-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}
+      ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID:-GK0123456789abcdef01234567}
+      SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+      BUCKET_IMAGES: ${S3_BUCKET_IMAGES:-facade-images}
+      BUCKET_MODELS: ${S3_BUCKET_MODELS:-facade-models}
+    ports:
+      # Only the S3 API is published: presigned URLs handed to the browser must
+      # point at a host the browser can actually reach. 3901/3902 stay internal.
+      - "${GARAGE_PORT:-3900}:3900"
+    volumes:
+      - garage_meta:/var/lib/garage/meta
+      - garage_data:/var/lib/garage/data
+    healthcheck:
+      # Readiness rather than liveness: this fails until the bootstrap has
+      # created the bucket, so `depends_on: service_healthy` above really does
+      # guarantee a usable store.
+      test:
+        - CMD-SHELL
+        - /garage -c /etc/garage.toml bucket info "$$BUCKET_IMAGES" >/dev/null 2>&1
+      interval: 5s
+      timeout: 5s
+      retries: 24
+      start_period: 20s
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+  redis_data:
+  garage_meta:
+  garage_data:
+  nodeodm_data:
+  # The SPA's dependencies: linux, installed at image build time, and kept away
+  # from the host's own node_modules by the bind mount above.
+  frontend_node_modules:
+
+networks:
+  backend:
+    driver: bridge

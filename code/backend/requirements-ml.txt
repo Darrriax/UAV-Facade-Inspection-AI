@@ -1,0 +1,38 @@
+# Worker-only dependencies: computer vision and the NodeODM client.
+#
+#   pip install -r requirements-ml.txt
+#
+# The `-r` below pulls in the base set, so this file alone is enough for a
+# complete local development environment.
+-r requirements.txt
+
+# --- object detection / segmentation ----------------------------------
+# CPU build note: Dockerfile installs torch/torchvision from
+# https://download.pytorch.org/whl/cpu *first*, so the pins below are already
+# satisfied and pip does not drag in the several-GB CUDA build. Installing this
+# file directly on a workstation without a GPU will pull the default wheel.
+torch>=2.2
+torchvision>=0.17
+ultralytics>=8.3
+# `dill` is not needed by ultralytics itself but *is* needed to unpickle the
+# published CUBIT-InSeg checkpoints: they were saved by a fork that pickled the
+# module graph through dill. Without it torch raises
+# "ModuleNotFoundError: No module named 'dill'" before the model can be
+# inspected; ultralytics' auto-install only fixes the *next* process, not the
+# load that is already running.
+dill>=0.3
+# Headless: the container has no X libraries, and ultralytics imports cv2.
+opencv-python-headless>=4.10
+numpy>=1.26
+
+# --- mesh conversion (NodeODM output -> .glb) --------------------------
+# ODM emits a textured .obj + .mtl + texture images; trimesh turns that into the
+# single self-contained .glb the Model3D contract expects. Pillow is what embeds
+# the texture image inside the GLB, so it is not optional here even though
+# trimesh itself does not depend on it.
+trimesh>=4.4
+Pillow>=10.4
+
+# The NodeODM client (pyodm) is part of the base set in requirements.txt, which
+# this file includes: it is tiny, and keeping it there means the photogrammetry
+# module imports cleanly without the computer-vision stack.

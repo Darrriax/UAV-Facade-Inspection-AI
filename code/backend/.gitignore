@@ -1,0 +1,16 @@
+# Byte-compiled / cache (the container runs with PYTHONDONTWRITEBYTECODE=1,
+# but anything run on the host - alembic, pytest, `python -m app.cli` - does not)
+__pycache__/
+*.py[cod]
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Local configuration (see .env.example for the template)
+.env
+.env.local
+
+# Trained weights: the worker mounts them from the host at model/best.pt
+model/

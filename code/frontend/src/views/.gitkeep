@@ -1,0 +1,4 @@
+Route-level screens, one file per route name in ../router/routes/names.ts.
+Split by audience: admin/ (inspectors, all projects), inspector/ (dashboard,
+wizard, workspace), shared/ (login, forbidden, not-found, profile).
+No .vue files yet - step 1 is the data layer and the routing table.

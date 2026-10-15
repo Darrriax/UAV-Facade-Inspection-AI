@@ -1,3 +1,11 @@
 docs-additional/system_architecture_context.md
 .idea/
 .DS_Store
+# Local configuration and secrets; `.env.example` is the tracked template.
+.env
+.venv
+.env.local
+.env.*.local
+.freebuff
+# UAV datasets and other large local inputs are not versioned.
+/images/

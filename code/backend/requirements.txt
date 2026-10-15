@@ -1,0 +1,43 @@
+# Base runtime for the API service.
+#
+# The heavy AI stack (torch, ultralytics, opencv, pyodm) is deliberately NOT
+# here: only the Celery worker needs it, and installing it into the API image
+# would add ~2 GB and minutes to every rebuild. See requirements-ml.txt, which
+# includes this file via `-r` so `pip install -r requirements-ml.txt` still
+# gives you a complete local environment.
+
+# --- web ---------------------------------------------------------------
+fastapi>=0.115
+uvicorn[standard]>=0.30
+
+# --- persistence -------------------------------------------------------
+SQLAlchemy>=2.0.30
+psycopg[binary]>=3.1.18
+alembic>=1.13
+pydantic>=2.7
+# >=2.4 for the NoDecode marker used by BACKEND_CORS_ORIGINS.
+pydantic-settings>=2.4
+
+# --- async processing --------------------------------------------------
+celery[redis]>=5.4
+redis>=5.0
+
+# --- storage / security ------------------------------------------------
+boto3>=1.34
+PyJWT>=2.8
+# bcrypt directly, NOT passlib[bcrypt]: passlib 1.7.4 reads the removed
+# `bcrypt.__about__` attribute and raises against bcrypt >= 4.1.
+bcrypt>=4.1
+# Required by pydantic's EmailStr.
+email-validator>=2.1
+python-multipart>=0.0.9
+
+# --- photogrammetry (NodeODM REST client) ------------------------------
+# pyodm is a thin pure-Python client (~30 kB, plus the requests already listed
+# above), so unlike the computer-vision stack it is cheap enough to live in the
+# base set - and it keeps the NodeODM step importable outside the worker image.
+# It is what actually talks to NodeODM: it builds the multipart upload, encodes
+# the option payload and downloads the result archive. torch, ultralytics and
+# opencv are the heavy ones and stay in requirements-ml.txt.
+pyodm>=1.5
+requests>=2.31

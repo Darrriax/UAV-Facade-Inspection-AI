@@ -1,0 +1,38 @@
+# Single-node Garage cluster for local development.
+#
+# Deliberately contains NO secrets: `rpc_secret` and `admin_token` are supplied
+# through the GARAGE_RPC_SECRET / GARAGE_ADMIN_TOKEN environment variables by
+# docker-compose.yml. Garage refuses to start when a config file holding secrets
+# is world-readable, and mounted files inherit the host's permissions, so
+# keeping secrets out of the file avoids that trap entirely.
+
+metadata_dir = "/var/lib/garage/meta"
+data_dir = "/var/lib/garage/data"
+
+# sqlite keeps the metadata in one file; lmdb (the default) spreads it over a
+# directory, which is noisier to back up for a dev instance.
+db_engine = "sqlite"
+
+# One copy of every object: this is a single-node dev cluster, not a cluster
+# that could survive losing a disk.
+replication_factor = 1
+
+rpc_bind_addr = "[::]:3901"
+# Address advertised to other nodes. This is a single-node cluster, so loopback
+# is correct - and important: the `garage` CLI resolves this value for admin
+# operations, and using the compose service name would fail wherever that name
+# is not resolvable (which is exactly what happens outside the compose network).
+rpc_public_addr = "127.0.0.1:3901"
+
+[s3_api]
+s3_region = "garage"
+api_bind_addr = "[::]:3900"
+root_domain = ".s3.garage.localhost"
+
+[s3_web]
+bind_addr = "[::]:3903"
+root_domain = ".web.garage.localhost"
+index = "index.html"
+
+[admin]
+api_bind_addr = "[::]:3902"
