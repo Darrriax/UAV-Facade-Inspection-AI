@@ -161,6 +161,9 @@ const frameCount = computed(() => project.value?.stats.total_images ?? 0)
 /** What the viewer renders: this page's own mesh first, then the server's. */
 const modelUrl = computed(() => glbUrl.value ?? serverModel.value?.url ?? null)
 
+/** The URL the last refresh was for, so a failed load is refreshed once. */
+const refreshedFor = ref<string | null>(null)
+
 const busy = computed(
   () =>
     phase.value === 'preparing' ||
@@ -478,6 +481,22 @@ async function retrieve(): Promise<void> {
   phase.value = 'done'
 }
 
+/**
+ * The viewer could not load the mesh. A stored mesh's signed URL expires after an
+ * hour, and a page left open past that finds its URL dead - so ask the API for a
+ * fresh one, once per URL. Retrying the same URL would only repeat the failure.
+ */
+async function onViewerFailed(): Promise<void> {
+  const current = modelUrl.value
+  if (!current || glbUrl.value || refreshedFor.value === current) return
+  refreshedFor.value = current
+  try {
+    serverModel.value = await getProjectModel3D(projectId.value)
+  } catch {
+    // Keep the failure on screen: there is no better URL to fall back to.
+  }
+}
+
 async function stop(): Promise<void> {
   if (!busy.value) return
   stopRequested = true
@@ -529,7 +548,7 @@ async function stop(): Promise<void> {
     <!-- The mesh, and nothing else: keyed by URL, so a later reconstruction
          mounts a fresh viewer instead of re-pointing a live loader. -->
     <div v-else-if="modelUrl" class="relative min-h-0 flex-1">
-      <ModelViewer :key="modelUrl" :url="modelUrl" />
+      <ModelViewer :key="modelUrl" :url="modelUrl" @failed="onViewerFailed" />
 
       <!-- The one exception to "nothing over the scene": a mesh that was not
            stored disappears with the next reload, and the user is the only one
